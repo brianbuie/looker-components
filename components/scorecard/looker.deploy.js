@@ -98,17 +98,11 @@ const input = {
           type: 'CHECKBOX',
           defaultValue: true,
         },
-        {
-          id: 'showLabels',
-          label: 'Show Breakdown Labels',
-          type: 'CHECKBOX',
-          defaultValue: true,
-        },
       ],
     },
     {
       id: 'theme',
-      label: 'Theme',
+      label: 'Style',
       elements: [
         {
           id: 'fontFamily',

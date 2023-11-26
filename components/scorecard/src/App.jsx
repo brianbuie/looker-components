@@ -5,7 +5,15 @@ import Scorecard from './Scorecard';
 
 function App() {
   const [data, setData] = useState({});
+  const [windowSize, setWindowSize] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
+  /**
+   * Subscribe to changes from Looker if in prod
+   * Or use mock data if in development
+   */
   useEffect(() => {
     if (import.meta.env.PROD) {
       subscribeToData(setData, { transform: objectTransform });
@@ -14,16 +22,37 @@ function App() {
     }
   }, []);
 
+  /**
+   * Listen for window size updates (resizing component in looker)
+   * Used for adjusting font size to prevent overflow
+   */
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  });
+
+  /**
+   * Issue loading data or currently debugging
+   */
   if (!data || !data.style) return null;
   if (data.style.showDataModel?.value) return <pre>{JSON.stringify(data, null, 2)}</pre>;
 
+  /**
+   * Mapping Looker's data structure to less confusing names
+   */
   const settings = data.style;
   const lookerTheme = data.theme;
   const values = data.tables.DEFAULT;
   const fields = data.fields;
 
   return (
-    <Theme settings={settings} lookerTheme={lookerTheme}>
+    <Theme settings={settings} lookerTheme={lookerTheme} windowSize={windowSize}>
       <Scorecard settings={settings} values={values} fields={fields} />
     </Theme>
   );
