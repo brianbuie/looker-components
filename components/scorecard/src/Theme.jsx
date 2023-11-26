@@ -2,9 +2,10 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 	:root {
-		font-family: ${props => props.theme.fontFamily || 'Roboto'}, sans-serif;
-		font-size: ${props => props.theme.fontSize || 14}px;
-		line-height: 1.5;
+		font-family: ${props => props.theme.fontFamily}, sans-serif;
+		font-size: ${props => props.theme.fontSizePx}px;
+		color: ${props => props.theme.textColor};
+		line-height: 1;
 		font-weight: 400;
 		font-synthesis: none;
 		text-rendering: optimizeLegibility;
@@ -21,8 +22,11 @@ const GlobalStyle = createGlobalStyle`
 
 const Theme = ({ settings, lookerTheme, children }) => {
   const theme = {
-    fontFamily: settings.fontFamily?.value || lookerTheme.themeFontFamily,
-    fontSize: settings.fontSize?.value,
+    fontFamily: settings.fontFamily?.value || lookerTheme.themeFontFamily || 'Roboto',
+    fontSizePx: settings.fontSize?.value || 24,
+    textColor: lookerTheme.themeFontColor?.color || 'black',
+    increaseColor: lookerTheme.themeIncreaseColor?.color || 'green',
+    decreaseColor: lookerTheme.themeDecreaseColor?.color || 'red',
   };
 
   return (

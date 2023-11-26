@@ -28,6 +28,7 @@ const manifest = {
   name: env.name,
   description: env.description,
   organization: 'Brian Buie',
+  devMode: true,
   components: [
     {
       name: env.name,
@@ -51,24 +52,24 @@ const input = {
   data: [
     {
       id: 'concepts',
-      label: 'Table Data',
+      label: 'Scorecard Data',
       elements: [
         {
-          id: 'dimensions',
-          label: 'Dimensions',
+          id: 'breakdown',
+          label: 'Breakdown',
           type: 'DIMENSION',
           options: {
-            min: 1,
-            max: 5,
+            min: 0,
+            max: 1,
           },
         },
         {
-          id: 'metrics',
-          label: 'Metrics',
+          id: 'metric',
+          label: 'Metric',
           type: 'METRIC',
           options: {
-            min: 0,
-            max: 5,
+            min: 1,
+            max: 1,
           },
         },
       ],
@@ -88,8 +89,26 @@ const input = {
       ],
     },
     {
+      id: 'options',
+      label: 'Options',
+      elements: [
+        {
+          id: 'showComparison',
+          label: 'Compare First & Last Values',
+          type: 'CHECKBOX',
+          defaultValue: true,
+        },
+        {
+          id: 'showLabels',
+          label: 'Show Breakdown Labels',
+          type: 'CHECKBOX',
+          defaultValue: true,
+        },
+      ],
+    },
+    {
       id: 'theme',
-      label: 'Table Theme',
+      label: 'Theme',
       elements: [
         {
           id: 'fontFamily',
@@ -100,15 +119,9 @@ const input = {
           id: 'fontSize',
           label: 'Font Size',
           type: 'FONT_SIZE',
-          defaultValue: 14,
+          defaultValue: 24,
         },
       ],
-    },
-  ],
-  interactions: [
-    {
-      id: 'interaction',
-      supportedActions: ['FILTER'],
     },
   ],
 };
