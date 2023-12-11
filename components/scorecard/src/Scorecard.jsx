@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import styled from 'styled-components';
+import { formatNumber } from 'common';
 
 const Container = styled.main`
   display: grid;
@@ -37,31 +38,6 @@ const Num = styled(Text)`
   }};
 `;
 
-const format = (value, type, role) => {
-  const _intl = options => Intl.NumberFormat('en-US', options).format(value);
-  if (type === 'PERCENT')
-    return _intl({
-      style: 'percent',
-      notation: 'compact',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      signDisplay: role === 'CHANGE' ? 'always' : 'auto',
-    });
-  if (type === 'CURRENCY_ USD')
-    return _intl({
-      style: 'currency',
-      currency: 'USD',
-      notation: 'compact',
-      minimumFractionDigits: 2,
-    });
-  return _intl({
-    notation: 'compact',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-    trailingZeroDisplay: 'stripIfInteger',
-  });
-};
-
 function Scorecard({ settings, values, fields }) {
   const showComparison = settings.showComparison && values.length > 1;
 
@@ -89,12 +65,12 @@ function Scorecard({ settings, values, fields }) {
             {label}
           </Text>
           <Num $value={value} $role={role} $wide>
-            {format(value, type, role)}
+            {formatNumber(value, type, role)}
           </Num>
           {comps.map((c, cKey) => (
             <Fragment key={cKey}>
               <Num $scale={0.7} $role="CHANGE" $value={c.value}>
-                {format(c.value, 'PERCENT', 'CHANGE')}
+                {formatNumber(c.value, 'PERCENT', 'CHANGE')}
               </Num>
               <Text $scale={0.6}>{c.label}</Text>
             </Fragment>
