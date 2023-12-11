@@ -13,8 +13,8 @@ const env = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  env.name = 'Scorecard';
-  env.bucket = 'gs://bbuie-looker/scorecard';
+  env.name = 'Scorecard v2';
+  env.bucket = 'gs://bbuie-looker/scorecard-v2';
 }
 
 console.log(`\nDeploying "${env.name}" to ${env.bucket}...\n`);
@@ -59,7 +59,7 @@ const input = {
           label: 'Breakdown',
           type: 'DIMENSION',
           options: {
-            min: 0,
+            min: 1,
             max: 1,
           },
         },
