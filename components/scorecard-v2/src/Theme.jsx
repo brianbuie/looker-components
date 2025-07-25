@@ -32,15 +32,12 @@ const Theme = ({ settings, lookerTheme, windowSize, children }) => {
   const idealSize = settings.fontSize?.value || 24;
   const fontSize = idealSize * 1.85 < windowSize.height ? idealSize : windowSize.height / 1.8;
 
-  const positive = lookerTheme.themeIncreaseColor?.color || 'green';
-  const negative = lookerTheme.themeDecreaseColor?.color || 'red';
-
   const theme = {
     fontFamily: settings.fontFamily?.value || lookerTheme.themeFontFamily || '',
     fontSize,
     textColor: lookerTheme.themeFontColor?.color || 'black',
-    increaseColor: settings.flipColors?.value ? negative : positive,
-    decreaseColor: settings.flipColors?.value ? positive : negative,
+    increaseColor: lookerTheme.themeIncreaseColor?.color || 'green',
+    decreaseColor: lookerTheme.themeDecreaseColor?.color || 'red',
   };
 
   return (

@@ -1,0 +1,11 @@
+{
+  "name": "scorecard",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "stage": "vite build && node looker.deploy.js",
+    "prod": "vite build && NODE_ENV=production node looker.deploy.js"
+  }
+}

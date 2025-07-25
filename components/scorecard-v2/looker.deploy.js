@@ -9,12 +9,12 @@ import { execSync } from 'child_process';
 const env = {
   name: '[Dev] Scorecard',
   description: 'A flexible scorecard component',
-  bucket: 'gs://bbuie-looker-dev/scorecard',
+  bucket: 'gs://bbuie-looker-dev/scorecard-v2',
 };
 
 if (process.env.NODE_ENV === 'production') {
-  env.name = 'Scorecard';
-  env.bucket = 'gs://bbuie-looker/scorecard';
+  env.name = 'Scorecard v2';
+  env.bucket = 'gs://bbuie-looker/scorecard-v2';
 }
 
 console.log(`\nDeploying "${env.name}" to ${env.bucket}...\n`);
@@ -59,7 +59,7 @@ const input = {
           label: 'Breakdown',
           type: 'DIMENSION',
           options: {
-            min: 0,
+            min: 1,
             max: 1,
           },
         },
@@ -97,12 +97,6 @@ const input = {
           label: 'Compare First & Last Values',
           type: 'CHECKBOX',
           defaultValue: true,
-        },
-        {
-          id: 'flipColors',
-          label: 'Flip -/+ Color Scale',
-          type: 'CHECKBOX',
-          defaultValue: false,
         },
       ],
     },
